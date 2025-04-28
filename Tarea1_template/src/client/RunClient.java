@@ -2,18 +2,18 @@ package client;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.InputMismatchException; // Para manejar errores de entrada
-import java.util.Scanner;             // Para leer la entrada del usuario
+import java.util.InputMismatchException;
+import java.util.Scanner;             
 
 public class RunClient {
 
     public static void main(String[] args) {
         Client client = new Client();
-        Scanner scanner = new Scanner(System.in); // Crear Scanner para entrada
+        Scanner scanner = new Scanner(System.in); 
         boolean salir = false;
 
         try {
-            client.startClient(); // Intenta conectar con el servidor
+            client.startClient(); // conectar con el servidor
             System.out.println("¡CLIENTE CONECTADO!");
             System.out.println("-------------------------");
 
@@ -25,20 +25,17 @@ public class RunClient {
                 System.out.println("0. Salir");
                 System.out.print("Seleccione una opción: ");
 
-                int opcion = -1; // Valor inicial inválido
+                int opcion = -1;
 
-                // Leer opción del usuario y manejar errores si no es número
                 try {
                     opcion = scanner.nextInt();
-                    scanner.nextLine(); // Consumir el salto de línea restante
+                    scanner.nextLine(); 
                 } catch (InputMismatchException e) {
                     System.err.println("Error: Por favor, ingrese un número válido.");
                     scanner.nextLine(); // Limpiar el buffer del scanner
-                    continue; // Volver al inicio del bucle while
+                    continue; 
                 }
 
-
-                // Procesar opción con switch
                 switch (opcion) {
                     case 1:
                         // Lógica para agregar persona
@@ -49,13 +46,13 @@ public class RunClient {
                             System.out.print("Ingrese la edad de la persona: ");
                             try {
                                 edad = scanner.nextInt();
-                                scanner.nextLine(); // Consumir salto de línea
+                                scanner.nextLine(); 
                                 if (edad < 0) {
                                     System.out.println("La edad no puede ser negativa.");
                                 }
                             } catch (InputMismatchException e) {
                                 System.err.println("Error: Ingrese una edad numérica válida.");
-                                scanner.nextLine(); // Limpiar buffer
+                                scanner.nextLine(); 
                             }
                         }
                         // Llamar al método del cliente para agregar en el servidor
@@ -67,7 +64,7 @@ public class RunClient {
                              // Considera si quieres reintentar o salir en caso de error RMI
                         }
 
-                        break; // Salir del switch
+                        break; 
 
                     case 2:
                         // Lógica para ver la lista
@@ -78,20 +75,18 @@ public class RunClient {
                             System.err.println("Error al obtener la lista del servidor: " + e.getMessage());
                             // Considera acciones si falla la comunicación
                         }
-                        break; // Salir del switch
+                        break; 
 
                     case 0:
-                        // Salir
                         salir = true;
                         System.out.println("Desconectando...");
-                        break; // Salir del switch
+                        break; 
 
                     default:
-                        // Opción inválida
                         System.out.println("Opción no válida. Intente de nuevo.");
-                        break; // Salir del switch
-                } // Fin del switch
-            } // Fin del while
+                        break; 
+                } 
+            } 
 
         } catch (RemoteException e) {
             System.err.println("Error de RMI: No se pudo conectar o comunicar con el servidor.");
@@ -105,8 +100,8 @@ public class RunClient {
              System.err.println("Ocurrió un error inesperado en el cliente: " + e.getMessage());
              e.printStackTrace();
         } finally {
-            scanner.close(); // Siempre cerrar el scanner al final
+            scanner.close(); 
             System.out.println("Cliente terminado.");
         }
-    } // Fin del main
-} // Fin de la clase
+    } 
+} 

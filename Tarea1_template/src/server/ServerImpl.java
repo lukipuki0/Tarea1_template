@@ -14,14 +14,12 @@ public class ServerImpl implements InterfazDeServer {
 	
 	public ServerImpl() throws RemoteException{
 		UnicastRemoteObject.exportObject((Remote) this,0);
-		crearBD();
-		
+		crearBD();	
 	}
 	
 	private void crearBD() {
 		Persona persona1 = new Persona("Kirito",21);
 		Persona persona2 = new Persona("Pablo",25);
-		
 		BD_personas.add(persona1);
 		BD_personas.add(persona2);
 		System.out.println("Base de datos inicial creada con 2 personas.");

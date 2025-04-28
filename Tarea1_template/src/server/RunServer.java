@@ -12,11 +12,11 @@ public class RunServer {
 
     public static void main(String[] args) {
         try {
-            int port = 1009;
+            int port = 1009; // puerto RMI
 
             InterfazDeServer serverImpl = new ServerImpl();
-
-            Registry registry;
+            
+            Registry registry;//crea el registro RMI
             try {
                 registry = LocateRegistry.createRegistry(port);
                 System.out.println("Registro RMI creado en el puerto " + port);
@@ -25,7 +25,7 @@ public class RunServer {
                 registry = LocateRegistry.getRegistry(port);
             }
 
-
+            //  Vincular la implementación al registro con un nombre
             registry.bind("server", (Remote) serverImpl);
 
             System.out.println("Servidor RMI listo y vinculado como 'server' en el puerto " + port);

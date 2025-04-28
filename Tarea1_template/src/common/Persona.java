@@ -25,7 +25,4 @@ public class Persona implements Serializable{
 		return this.nombre;
 	}
 	
-	
-
-
 }
